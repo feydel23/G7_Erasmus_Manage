@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace Erasmus_Manager
 {
     public partial class FrmLogin : Form
     {
@@ -17,9 +17,18 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
+            OpenFileD ofd = new OpenFileD();
+            ofd.Filter = "txt files (*.txt)|*.txt";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                UserFileReader filereader = new UserFileReader();
+                
+                string file = ofd.FileName;
+                string text = System.IO.File.ReadAllText(file);
+                MessageBox.Show(text);
+            }
         }
     }
 }
